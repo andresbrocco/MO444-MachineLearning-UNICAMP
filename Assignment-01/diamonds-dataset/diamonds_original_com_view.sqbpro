@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/home/asbrocco/Documents/MO444-MachineLearning-UNICAMP/Assignment-01/diamonds-dataset/diamonds_original"/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="762"/><expanded_item id="0" parent="-1"/><expanded_item id="1" parent="-1"/><expanded_item id="2" parent="-1"/><expanded_item id="3" parent="-1"/></tab_structure><tab_browse><current_table name="diamonds-test"/><default_encoding codec=""/><browsetable_info data="AAAAAQAAABoAZABpAGEAbQBvAG4AZABzAC0AdABlAHMAdAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////8="/></tab_browse><tab_sql><sql name="SQL 1">drop view statistics;
+create view statistics
+as
+	with aux1 as (select avg(carat) as average from 'diamonds-train') 
+	select 'carat' as campo,
+	aux1.average, 
+	AVG((carat - aux1.average) * (carat - aux1.average)) as variance,
+	min(carat) as min,
+	max(carat) as max,
+	from 'diamonds-train' join aux1
+union 
+	with aux1 as (select avg(price) as average from 'diamonds-train') 
+	select 'price' as campo,
+	aux1.average, 
+	AVG((price - aux1.average) * (price - aux1.average)) as variance,
+	min(price) as min,
+	max(price) as max,
+	from 'diamonds-train' join aux1;
+	
+select * from statistics</sql><current_tab id="0"/></tab_sql></sqlb_project>
